@@ -176,7 +176,9 @@ class PuzzleMaster {
         this.mezclarArray(posiciones);
         
         // Tamaño de cada pieza en píxeles
-        const tamanoPieza = 100; // 100px
+        // calcular tamaño según el tablero (RESPONSIVE REAL)
+const tableroSize = this.tablero.offsetWidth;
+const tamanoPieza = tableroSize / 3;
         
         posiciones.forEach((pos, index) => {
             if (!this.piezasColocadas[pos]) {
@@ -191,7 +193,7 @@ class PuzzleMaster {
                 
                 // La imagen completa es de 300x300, cada pieza debe mostrar 100x100
                 pieza.style.backgroundImage = `url('${this.imagenActual}')`;
-                pieza.style.backgroundSize = '300px 300px';
+                pieza.style.backgroundSize = `${tableroSize}px ${tableroSize}px`;
                 pieza.style.backgroundRepeat = 'no-repeat';
                 
                 // Posición del fragmento (en negativo)
@@ -200,8 +202,8 @@ class PuzzleMaster {
                 pieza.style.backgroundPosition = `${posX}px ${posY}px`;
                 
                 // Asegurar que la pieza muestre solo 100x100
-                pieza.style.width = '100px';
-                pieza.style.height = '100px';
+                pieza.style.width = `${tamanoPieza}px`;
+pieza.style.height = `${tamanoPieza}px`;
                 
                 // Eventos
                 pieza.addEventListener('dragstart', (e) => this.arrastrarPieza(e, pieza));
