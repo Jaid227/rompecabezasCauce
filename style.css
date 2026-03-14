@@ -843,3 +843,13 @@ body {
         padding: 15px;
     }
 }
+
+
+.board-container{
+width:100%;
+max-width:90vw;
+}
+
+.board{
+width:100%;
+}
