@@ -801,3 +801,45 @@ body {
         transform: none;
     }
 }
+
+
+
+/* ============================================
+   PUZZLE MASTER - TU DISEÑO ORIGINAL + RESPONSIVE
+   ============================================ */
+
+/* TUS ESTILOS ORIGINALES AQUÍ (los que ya tenías) */
+/* ... copia aquí todo tu CSS original ... */
+
+/* ===== SOLO AÑADE ESTO AL FINAL ===== */
+@media (max-width: 480px) {
+    .pieces-container {
+        gap: 5px;
+        padding: 10px;
+    }
+    
+    .board {
+        gap: 4px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 380px) {
+    .pieces-container {
+        gap: 3px;
+        padding: 8px;
+    }
+    
+    .board {
+        gap: 3px;
+        padding: 6px;
+    }
+}
+
+/* Para tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .pieces-container {
+        gap: 8px;
+        padding: 15px;
+    }
+}
