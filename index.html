@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>🧩 Puzzle Master - Rompecabezas de 9 piezas</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
         <div class="puzzle-header">
             <h1 class="puzzle-title">
                 <span class="title-icon">🧩</span>
-                PUZZLE MASTER
+                <span class="title-text">PUZZLE MASTER</span>
                 <span class="title-icon">🎮</span>
             </h1>
             <p class="puzzle-subtitle">Arrastra cada pieza a su lugar correcto</p>
@@ -71,31 +71,20 @@
                         <!-- Las casillas se generarán dinámicamente -->
                     </div>
                     <div class="board-overlay" id="boardOverlay">
-                        <div class="completion-message" id="completionMessage">¡COMPLETADO!</div>
+                        <div class="completion-message">¡COMPLETADO!</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Vista previa y piezas -->
+            <!-- Piezas disponibles -->
             <div class="pieces-section">
-                <div class="preview-container">
-                    <h2 class="section-title">
-                        <span class="section-icon">👁️</span>
-                        Vista previa
-                    </h2>
-                    <div class="preview-frame">
-                        <img src="" alt="Vista previa" class="preview-image" id="previewImage">
-                    </div>
-                </div>
-
                 <div class="pieces-header">
                     <h2 class="section-title">
                         <span class="section-icon">🧩</span>
                         Piezas disponibles
                     </h2>
-                    <div class="pieces-counter" id="piezasRestantes">9 disponibles</div>
+                    <div class="pieces-counter" id="piezasRestantes">9</div>
                 </div>
-
                 <div class="pieces-container" id="piezasContainer">
                     <!-- Las piezas se generarán dinámicamente -->
                 </div>
@@ -104,51 +93,61 @@
 
         <!-- Controles del juego -->
         <div class="controls-section">
-
+            <button class="btn btn-primary" id="btnMezclar">
+                <span class="btn-icon">🔄</span>
+                <span class="btn-text">Mezclar</span>
+            </button>
+            <button class="btn btn-success" id="btnReiniciar">
+                <span class="btn-icon">🆕</span>
+                <span class="btn-text">Reiniciar</span>
+            </button>
+            <button class="btn btn-warning" id="btnPista">
+                <span class="btn-icon">🔍</span>
+                <span class="btn-text">Pista</span>
+            </button>
             <button class="btn btn-info" id="btnRevelar">
                 <span class="btn-icon">✨</span>
-                <span class="btn-text">Revelar imagen</span>
+                <span class="btn-text">Revelar</span>
             </button>
         </div>
 
-        <!-- Modal de victoria (actualizado) -->
-<div class="modal" id="victoryModal">
-    <div class="modal-content">
-        <button class="modal-close" id="closeModal">&times;</button>
-        <div class="modal-icon">🏆</div>
-        <h2 class="modal-title">¡VICTORIA!</h2>
-        <p class="modal-subtitle">Has completado el rompecabezas</p>
-        
-        <div class="modal-stats">
-            <div class="modal-stat">
-                <div class="modal-stat-icon">⏱️</div>
-                <div>
-                    <div class="modal-stat-label">Tiempo</div>
-                    <div class="modal-stat-value" id="modalTiempo">00:00</div>
+        <!-- Modal de victoria -->
+        <div class="modal" id="victoryModal">
+            <div class="modal-content">
+                <button class="modal-close" id="closeModal">&times;</button>
+                <div class="modal-icon">🏆</div>
+                <h2 class="modal-title">¡VICTORIA!</h2>
+                <p class="modal-subtitle">Has completado el rompecabezas</p>
+                
+                <div class="modal-stats">
+                    <div class="modal-stat">
+                        <div class="modal-stat-icon">⏱️</div>
+                        <div>
+                            <div class="modal-stat-label">Tiempo</div>
+                            <div class="modal-stat-value" id="modalTiempo">00:00</div>
+                        </div>
+                    </div>
+                    <div class="modal-stat">
+                        <div class="modal-stat-icon">🔄</div>
+                        <div>
+                            <div class="modal-stat-label">Movimientos</div>
+                            <div class="modal-stat-value" id="modalMovimientos">0</div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-stat">
-                <div class="modal-stat-icon">🔄</div>
-                <div>
-                    <div class="modal-stat-label">Movimientos</div>
-                    <div class="modal-stat-value" id="modalMovimientos">0</div>
-                </div>
-            </div>
-        </div>
 
-        <!-- BOTÓN NUEVO: Ver información -->
-        <div class="modal-buttons">
-            <button class="btn btn-success modal-btn" id="modalReiniciar">
-                <span class="btn-icon">🎮</span>
-                Jugar de nuevo
-            </button>
-            <button class="btn btn-info modal-btn" id="btnVerInfo">
-                <span class="btn-icon">ℹ️</span>
-                Ver información
-            </button>
+                <div class="modal-buttons">
+                    <button class="btn btn-success modal-btn" id="modalReiniciar">
+                        <span class="btn-icon">🎮</span>
+                        Jugar de nuevo
+                    </button>
+                    <button class="btn btn-info modal-btn" id="btnVerInfo">
+                        <span class="btn-icon">ℹ️</span>
+                        Ver información
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
     </div>
 
     <script src="script.js"></script>
