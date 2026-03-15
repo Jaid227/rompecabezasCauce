@@ -22,47 +22,100 @@ class PuzzleMaster {
         
         // Lista de tus imágenes (deben estar en la carpeta /imagenes/)
         this.imagenes = [
-            { 
-                id: 1, 
-                nombre: 'Salud Mental', 
-                archivo: 'imagenes/rompecabezas1.png',
-                tamaño: '245 KB',
-                formato: 'PNG',
-                descripcion: 'Una emocionante imagen de aventura con paisajes montañosos. Perfecta para poner a prueba tu habilidad.'
-            },
-            { 
-                id: 2, 
-                nombre: 'Sociolaboral', 
-                archivo: 'imagenes/rompecabezas2.png',
-                tamaño: '312 KB',
-                formato: 'PNG',
-                descripcion: 'Hermosa imagen de la naturaleza con bosques frondosos. Conecta con la naturaleza mientras armas este puzzle.'
-            },
-            { 
-                id: 3, 
-                nombre: 'Tecnología e innovación', 
-                archivo: 'imagenes/rompecabezas3.png',
-                tamaño: '289 KB',
-                formato: 'PNG',
-                descripcion: 'Moderna imagen urbana con rascacielos. Disfruta de la vida citadina en este desafiante rompecabezas.'
-            },
-            { 
-                id: 4, 
-                nombre: 'Sociocomunitario', 
-                archivo: 'imagenes/rompecabezas4.png',
-                tamaño: '298 KB',
-                formato: 'PNG',
-                descripcion: 'Fascinante imagen del espacio exterior con galaxias y estrellas.'
-            },
-            { 
-                id: 5, 
-                nombre: 'Fundación', 
-                archivo: 'imagenes/rompecabezas5.png',
-                tamaño: '423 KB',
-                formato: 'PNG',
-                descripcion: 'Colorida obra de arte abstracto con formas y patrones únicos.'
-            }
-        ];
+
+{
+id: 1,
+nombre: 'Clínica IMOX',
+archivo: 'imagenes/rompecabezas1.png',
+
+impactos: [
+{
+personas: '412',
+texto: '84% de las personas participantes tienen bienestar emocional'
+},
+{
+personas: '412',
+texto: '75% de las personas participantes mejoran sus relaciones interpersonales'
+},
+{
+personas: '119',
+texto: '87% de las personas consultantes consideran haber cumplido su objetivo terapéutico'
+}
+],
+
+descripcion: 'Fortalecer el bienestar emocional, psicológico y social en niñez, juventudes y mujeres de la zona oriente del Valle de México, a través de la promoción y atención a la salud mental, para generar resiliencia individual y comunitaria.'
+},
+
+{
+id: 2,
+nombre: 'Sociolaboral',
+archivo: 'imagenes/rompecabezas2.png',
+
+impactos: [
+{
+personas: '500',
+texto: '72% acceden a capacitaciones gratuitas o de bajo costo'
+},
+{
+personas: '486',
+texto: '76% tienen acceso por primera vez a capacitaciones en empleabilidad'
+},
+{
+personas: '500',
+texto: '72% consideran que mejora sus oportunidades laborales'
+},
+{
+personas: '500',
+texto: '82% consideran que podrían mejorar sus ingresos'
+}
+],
+
+descripcion: 'Promover la empleabilidad en juventudes y mujeres de la zona Oriente del Valle de México, a través de capacitaciones y de la generación de alianzas para la inserción laboral y fomento de la economía popular, permitiéndoles la obtención de ingresos y disminución de sus vulnerabilidades económicas.'
+},
+
+{
+id: 3,
+nombre: 'Tecnología e innovación',
+archivo: 'imagenes/rompecabezas3.png',
+
+impactos: [
+{
+personas: '645',
+texto: '66% se alfabetizan digitalmente'
+},
+{
+personas: '125',
+texto: '69% muestran apropiación tecnológica'
+},
+{
+personas: '645',
+texto: '80% acceden por primera vez a capacitación tecnológica'
+}
+],
+
+descripcion: 'Fomentar el desarrollo de habilidades y competencias digitales en niñez, juventudes y mujeres de la zona oriente del Valle de México, a través de procesos de iniciación, capacitación e innovación, para ampliar sus oportunidades educativas, laborales y de participación social, contribuyendo al bien común.'
+},
+
+{
+id: 4,
+nombre: 'Sociocomunitario',
+archivo: 'imagenes/rompecabezas4.png',
+
+impactos: [
+{
+personas: '609',
+texto: '61% acceden por primera vez a sus derechos culturales'
+},
+{
+personas: '271',
+texto: '74% fortalecen su identidad comunitaria'
+}
+],
+
+descripcion: 'Favorecer el desarrollo fomentando la cultura comunitaria y la educación no formal, con niñez, juventudes y mujeres de la zona oriente del Valle de México.'
+}
+
+];
         
         // Estado del juego
         this.imagenActual = null;
@@ -528,65 +581,33 @@ pieza.style.height = `${tamanoPieza}px`;
         modalInfo.innerHTML = `
             <div class="info-modal-content">
                 <button class="info-modal-close" id="closeInfoModal">&times;</button>
-                <h2 class="info-modal-title">Información de la imagen</h2>
+                <h2 class="info-modal-title">Información del área</h2>
                 
                 <img src="" alt="Imagen" class="info-modal-image" id="infoImagenModal">
                 
-                <div class="info-grid">
-                    <div class="info-card">
-                        <div class="info-card-icon">📛</div>
-                        <div class="info-card-content">
-                            <span class="info-card-label">Nombre</span>
-                            <span class="info-card-value" id="infoNombreModal">-</span>
-                        </div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-card-icon">📏</div>
-                        <div class="info-card-content">
-                            <span class="info-card-label">Dimensiones</span>
-                            <span class="info-card-value" id="infoDimensionesModal">300x300</span>
-                        </div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-card-icon">📦</div>
-                        <div class="info-card-content">
-                            <span class="info-card-label">Tamaño</span>
-                            <span class="info-card-value" id="infoTamañoModal">-</span>
-                        </div>
-                    </div>
-                    
-                    <div class="info-card">
-                        <div class="info-card-icon">🎨</div>
-                        <div class="info-card-content">
-                            <span class="info-card-label">Formato</span>
-                            <span class="info-card-value" id="infoFormatoModal">PNG</span>
-                        </div>
-                    </div>
-                </div>
+                <div class="info-card">
+<div class="info-card-icon">👥</div>
+<div class="info-card-content">
+<span class="info-card-label">Personas evaluadas</span>
+<span class="info-card-value" id="infoPersonasModal">-</span>
+</div>
+</div>
+
+<div class="info-card">
+<div class="info-card-icon">📊</div>
+<div class="info-card-content">
+<span class="info-card-label">Impactos</span>
+<div id="infoImpactosModal"></div>
+</div>
+</div>
+
+
                 
                 <div class="info-description">
                     <h3>📝 Descripción</h3>
                     <p id="infoDescripcionModal">Cargando descripción...</p>
                 </div>
                 
-                <div class="info-achievements">
-                    <h3>🏅 Tus logros</h3>
-                    <div class="achievement-item">
-                        <span class="achievement-icon">⏱️</span>
-                        <span class="achievement-text" id="logroTiempoModal">Tiempo: 00:00</span>
-                    </div>
-                    <div class="achievement-item">
-                        <span class="achievement-icon">🔄</span>
-                        <span class="achievement-text" id="logroMovimientosModal">Movimientos: 0</span>
-                    </div>
-                    <div class="achievement-item">
-                        <span class="achievement-icon">🏆</span>
-                        <span class="achievement-text">¡Rompecabezas completado!</span>
-                    </div>
-                </div>
-            </div>
         `;
         
         document.body.appendChild(modalInfo);
@@ -621,8 +642,32 @@ pieza.style.height = `${tamanoPieza}px`;
         const imgModal = document.getElementById('infoImagenModal');
         if (imgModal) imgModal.src = this.imagenActual || '';
         
-        const nombreModal = document.getElementById('infoNombreModal');
-        if (nombreModal) nombreModal.textContent = info.nombre || 'Sin nombre';
+        const impactosContainer = document.getElementById("infoImpactosModal");
+
+if (impactosContainer) {
+
+impactosContainer.innerHTML = "";
+
+if (info.impactos) {
+
+info.impactos.forEach(item => {
+
+const bloque = document.createElement("div");
+
+bloque.className = "impact-item";
+
+bloque.innerHTML = `
+<div class="impact-personas">👥 ${item.personas} personas</div>
+<div class="impact-texto">📊 ${item.texto}</div>
+`;
+
+impactosContainer.appendChild(bloque);
+
+});
+
+}
+
+}
         
         const dimensionesModal = document.getElementById('infoDimensionesModal');
         if (dimensionesModal) dimensionesModal.textContent = '300x300';
