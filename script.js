@@ -1,6 +1,6 @@
 // ============================================
-// PUZZLE MASTER - VERSIÓN CORREGIDA
-// Las piezas muestran EXACTAMENTE el fragmento correcto
+// PUZZLE MASTER - VERSIÓN TÁCTIL OPTIMIZADA
+// Las piezas se mueven al tocarlas (toque y colocación)
 // ============================================
 
 class PuzzleMaster {
@@ -8,114 +8,57 @@ class PuzzleMaster {
         // Elementos del DOM
         this.tablero = document.getElementById('tablero');
         this.piezasContainer = document.getElementById('piezasContainer');
-        this.progreso = document.getElementById('progreso');
-        this.tiempoSpan = document.getElementById('tiempo');
-        this.movimientosSpan = document.getElementById('movimientos');
-        this.piezasRestantes = document.getElementById('piezasRestantes');
-        this.progressBar = document.getElementById('progressBar');
         this.previewImage = document.getElementById('previewImage');
         this.boardOverlay = document.getElementById('boardOverlay');
-        this.completionMessage = document.getElementById('completionMessage');
         this.victoryModal = document.getElementById('victoryModal');
-        this.modalTiempo = document.getElementById('modalTiempo');
-        this.modalMovimientos = document.getElementById('modalMovimientos');
         
-        // Lista de tus imágenes (deben estar en la carpeta /imagenes/)
+        // Lista de imágenes
         this.imagenes = [
-
-{
-id: 1,
-nombre: 'Clínica IMOX',
-archivo: 'imagenes/rompecabezas1.png',
-
-impactos: [
-{
-personas: '412',
-texto: '84% de las personas participantes tienen bienestar emocional'
-},
-{
-personas: '412',
-texto: '75% de las personas participantes mejoran sus relaciones interpersonales'
-},
-{
-personas: '119',
-texto: '87% de las personas consultantes consideran haber cumplido su objetivo terapéutico'
-}
-],
-
-descripcion: 'Fortalecer el bienestar emocional, psicológico y social en niñez, juventudes y mujeres de la zona oriente del Valle de México, a través de la promoción y atención a la salud mental, para generar resiliencia individual y comunitaria.'
-},
-
-{
-id: 2,
-nombre: 'Sociolaboral',
-archivo: 'imagenes/rompecabezas2.png',
-
-impactos: [
-{
-personas: '500',
-texto: '72% acceden a capacitaciones gratuitas o de bajo costo'
-},
-{
-personas: '486',
-texto: '76% tienen acceso por primera vez a capacitaciones en empleabilidad'
-},
-{
-personas: '500',
-texto: '72% consideran que mejora sus oportunidades laborales'
-},
-{
-personas: '500',
-texto: '82% consideran que podrían mejorar sus ingresos'
-}
-],
-
-descripcion: 'Promover la empleabilidad en juventudes y mujeres de la zona Oriente del Valle de México, a través de capacitaciones y de la generación de alianzas para la inserción laboral y fomento de la economía popular, permitiéndoles la obtención de ingresos y disminución de sus vulnerabilidades económicas.'
-},
-
-{
-id: 3,
-nombre: 'Tecnología e innovación',
-archivo: 'imagenes/rompecabezas3.png',
-
-impactos: [
-{
-personas: '645',
-texto: '66% se alfabetizan digitalmente'
-},
-{
-personas: '125',
-texto: '69% muestran apropiación tecnológica'
-},
-{
-personas: '645',
-texto: '80% acceden por primera vez a capacitación tecnológica'
-}
-],
-
-descripcion: 'Fomentar el desarrollo de habilidades y competencias digitales en niñez, juventudes y mujeres de la zona oriente del Valle de México, a través de procesos de iniciación, capacitación e innovación, para ampliar sus oportunidades educativas, laborales y de participación social, contribuyendo al bien común.'
-},
-
-{
-id: 4,
-nombre: 'Sociocomunitario',
-archivo: 'imagenes/rompecabezas4.png',
-
-impactos: [
-{
-personas: '609',
-texto: '61% acceden por primera vez a sus derechos culturales'
-},
-{
-personas: '271',
-texto: '74% fortalecen su identidad comunitaria'
-}
-],
-
-descripcion: 'Favorecer el desarrollo fomentando la cultura comunitaria y la educación no formal, con niñez, juventudes y mujeres de la zona oriente del Valle de México.'
-}
-
-];
+            {
+                id: 1,
+                nombre: 'Clínica IMOX',
+                archivo: 'imagenes/rompecabezas1.png',
+                impactos: [
+                    { personas: '412', texto: '84% de las personas participantes tienen bienestar emocional' },
+                    { personas: '412', texto: '75% mejoran sus relaciones interpersonales' },
+                    { personas: '119', texto: '87% cumplen objetivo terapéutico' }
+                ],
+                descripcion: 'Fortalecer el bienestar emocional, psicológico y social en niñez, juventudes y mujeres de la zona oriente del Valle de México.'
+            },
+            {
+                id: 2,
+                nombre: 'Sociolaboral',
+                archivo: 'imagenes/rompecabezas2.png',
+                impactos: [
+                    { personas: '500', texto: '72% acceden a capacitaciones gratuitas' },
+                    { personas: '486', texto: '76% acceden por primera vez a capacitaciones' },
+                    { personas: '500', texto: '72% mejoran oportunidades laborales' },
+                    { personas: '500', texto: '82% podrían mejorar sus ingresos' }
+                ],
+                descripcion: 'Promover la empleabilidad en juventudes y mujeres de la zona Oriente del Valle de México.'
+            },
+            {
+                id: 3,
+                nombre: 'Tecnología',
+                archivo: 'imagenes/rompecabezas3.png',
+                impactos: [
+                    { personas: '645', texto: '66% se alfabetizan digitalmente' },
+                    { personas: '125', texto: '69% muestran apropiación tecnológica' },
+                    { personas: '645', texto: '80% acceden por primera vez a capacitación tecnológica' }
+                ],
+                descripcion: 'Fomentar el desarrollo de habilidades y competencias digitales.'
+            },
+            {
+                id: 4,
+                nombre: 'Sociocomunitario',
+                archivo: 'imagenes/rompecabezas4.png',
+                impactos: [
+                    { personas: '609', texto: '61% acceden por primera vez a derechos culturales' },
+                    { personas: '271', texto: '74% fortalecen identidad comunitaria' }
+                ],
+                descripcion: 'Favorecer el desarrollo fomentando la cultura comunitaria y educación no formal.'
+            }
+        ];
         
         // Estado del juego
         this.imagenActual = null;
@@ -127,6 +70,8 @@ descripcion: 'Favorecer el desarrollo fomentando la cultura comunitaria y la edu
         this.tiempoInicio = null;
         this.temporizador = null;
         this.juegoCompletado = false;
+        this.tiempoSpan = document.getElementById('tiempo');
+        this.movimientosSpan = document.getElementById('movimientos');
         
         // Inicializar
         this.inicializar();
@@ -138,27 +83,23 @@ descripcion: 'Favorecer el desarrollo fomentando la cultura comunitaria y la edu
         this.configurarEventos();
         this.cargarUltimaImagen();
         this.agregarAnimaciones();
-        this.crearModalInfo(); // Crear modal de información al inicio
+        this.crearModalInfo();
     }
     
     crearTablero() {
+        if (!this.tablero) return;
         this.tablero.innerHTML = '';
         for (let i = 0; i < 9; i++) {
             const celda = document.createElement('div');
             celda.className = 'board-cell empty';
             celda.dataset.posicion = i;
             
-            // Eventos drag & drop
-            celda.addEventListener('dragover', (e) => e.preventDefault());
-            celda.addEventListener('dragenter', () => {
-                if (!celda.hasChildNodes()) {
-                    celda.style.background = 'rgba(72, 187, 120, 0.2)';
-                }
+            // Evento táctil para colocar pieza
+            celda.addEventListener('click', (e) => this.manejarToqueEnCelda(e, celda));
+            celda.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.manejarToqueEnCelda(e, celda);
             });
-            celda.addEventListener('dragleave', () => {
-                celda.style.background = '';
-            });
-            celda.addEventListener('drop', (e) => this.soltarPieza(e, celda));
             
             this.tablero.appendChild(celda);
         }
@@ -219,7 +160,7 @@ descripcion: 'Favorecer el desarrollo fomentando la cultura comunitaria y la edu
     }
     
     crearPiezas() {
-        if (!this.piezasContainer) return;
+        if (!this.piezasContainer || !this.imagenActual) return;
         
         this.piezasContainer.innerHTML = '';
         this.piezas = [];
@@ -228,101 +169,111 @@ descripcion: 'Favorecer el desarrollo fomentando la cultura comunitaria y la edu
         const posiciones = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         this.mezclarArray(posiciones);
         
-        // Tamaño de cada pieza en píxeles
-        // calcular tamaño según el tablero (RESPONSIVE REAL)
-const tableroSize = this.tablero.offsetWidth;
-const tamanoPieza = tableroSize / 3;
+        // Obtener tamaño del tablero para calcular el tamaño de las piezas
+        const tableroSize = this.tablero ? this.tablero.offsetWidth : 300;
+        const tamanoPieza = tableroSize / 3;
         
         posiciones.forEach((pos, index) => {
             if (!this.piezasColocadas[pos]) {
                 const pieza = document.createElement('div');
                 pieza.className = 'piece';
-                pieza.draggable = true;
                 pieza.dataset.posicion = pos;
                 
-                // Calcular la posición exacta del fragmento
+                // Calcular la posición del fragmento
                 const fila = Math.floor(pos / 3);
                 const columna = pos % 3;
                 
-                // La imagen completa es de 300x300, cada pieza debe mostrar 100x100
                 pieza.style.backgroundImage = `url('${this.imagenActual}')`;
                 pieza.style.backgroundSize = `${tableroSize}px ${tableroSize}px`;
                 pieza.style.backgroundRepeat = 'no-repeat';
                 
-                // Posición del fragmento (en negativo)
                 const posX = -columna * tamanoPieza;
                 const posY = -fila * tamanoPieza;
                 pieza.style.backgroundPosition = `${posX}px ${posY}px`;
                 
-                // Asegurar que la pieza muestre solo 100x100
                 pieza.style.width = `${tamanoPieza}px`;
-pieza.style.height = `${tamanoPieza}px`;
+                pieza.style.height = `${tamanoPieza}px`;
                 
-                // Eventos
-                pieza.addEventListener('dragstart', (e) => this.arrastrarPieza(e, pieza));
-                pieza.addEventListener('dragend', () => this.terminarArrastre());
+                // Eventos táctiles
+                pieza.addEventListener('click', (e) => this.seleccionarPieza(e, pieza));
+                pieza.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    this.seleccionarPieza(e, pieza);
+                });
                 
-                // Animación de entrada
+                // Animación
                 pieza.style.animation = `slideIn 0.3s ease ${index * 0.05}s both`;
                 
                 this.piezasContainer.appendChild(pieza);
                 this.piezas.push(pieza);
             }
         });
-        
-        this.actualizarContadorPiezas();
     }
     
-    arrastrarPieza(e, pieza) {
-        this.piezaSeleccionada = pieza;
-        pieza.classList.add('dragging');
-        e.dataTransfer.setData('text/plain', pieza.dataset.posicion);
+    seleccionarPieza(e, pieza) {
+        e.preventDefault();
+        e.stopPropagation();
         
-        // Resaltar casillas vacías
-        document.querySelectorAll('.board-cell.empty').forEach(celda => {
-            celda.style.background = 'rgba(72, 187, 120, 0.1)';
-            celda.style.borderColor = '#48bb78';
+        // Si el juego está completado, no hacer nada
+        if (this.juegoCompletado) return;
+        
+        // Si ya hay una pieza seleccionada, desseleccionarla
+        if (this.piezaSeleccionada) {
+            this.piezaSeleccionada.classList.remove('selected-for-move');
+        }
+        
+        // Seleccionar la nueva pieza
+        this.piezaSeleccionada = pieza;
+        pieza.classList.add('selected-for-move');
+        
+        // Resaltar las celdas vacías disponibles
+        this.resaltarCeldasVacias();
+    }
+    
+    resaltarCeldasVacias() {
+        document.querySelectorAll('.board-cell').forEach(celda => {
+            if (!celda.hasChildNodes()) {
+                celda.style.background = 'rgba(72, 187, 120, 0.2)';
+                celda.style.borderColor = '#48bb78';
+                celda.style.borderWidth = '3px';
+            }
         });
     }
     
-    terminarArrastre() {
-        if (this.piezaSeleccionada) {
-            this.piezaSeleccionada.classList.remove('dragging');
-            this.piezaSeleccionada = null;
-        }
-        
-        // Restaurar casillas
+    quitarResaltadoCeldas() {
         document.querySelectorAll('.board-cell').forEach(celda => {
             celda.style.background = '';
             celda.style.borderColor = '';
+            celda.style.borderWidth = '';
         });
     }
     
-    soltarPieza(e, celda) {
+    manejarToqueEnCelda(e, celda) {
         e.preventDefault();
+        e.stopPropagation();
         
         if (!this.piezaSeleccionada || this.juegoCompletado) return;
         
         const posicionCelda = parseInt(celda.dataset.posicion);
         const posicionPieza = parseInt(this.piezaSeleccionada.dataset.posicion);
         
-        celda.style.background = '';
+        this.quitarResaltadoCeldas();
         
         if (posicionCelda === posicionPieza && !celda.hasChildNodes()) {
             this.colocarPieza(celda, posicionPieza);
         } else {
             this.mostrarError();
+            // Desseleccionar la pieza
+            if (this.piezaSeleccionada) {
+                this.piezaSeleccionada.classList.remove('selected-for-move');
+                this.piezaSeleccionada = null;
+            }
         }
     }
     
     colocarPieza(celda, posicion) {
         // Mover la pieza al tablero
         celda.appendChild(this.piezaSeleccionada);
-        this.piezaSeleccionada.draggable = false;
-        this.piezaSeleccionada.style.cursor = 'default';
-        this.piezaSeleccionada.classList.remove('dragging');
-        
-        // Ajustar la pieza dentro de la celda
         this.piezaSeleccionada.style.width = '100%';
         this.piezaSeleccionada.style.height = '100%';
         
@@ -340,6 +291,10 @@ pieza.style.height = `${tamanoPieza}px`;
             this.piezaSeleccionada.style.animation = '';
         }, 500);
         
+        // Desseleccionar
+        this.piezaSeleccionada.classList.remove('selected-for-move');
+        this.piezaSeleccionada = null;
+        
         this.verificarVictoria();
     }
     
@@ -347,6 +302,7 @@ pieza.style.height = `${tamanoPieza}px`;
         this.movimientos++;
         this.actualizarEstadisticas();
         
+        // Mostrar animación de error en la pieza seleccionada
         if (this.piezaSeleccionada) {
             this.piezaSeleccionada.style.animation = 'shake 0.5s';
             setTimeout(() => {
@@ -366,15 +322,7 @@ pieza.style.height = `${tamanoPieza}px`;
                 this.boardOverlay.classList.add('show');
             }
             
-            // Actualizar estadísticas del modal
-            if (this.modalTiempo) {
-                this.modalTiempo.textContent = this.tiempoSpan.textContent;
-            }
-            if (this.modalMovimientos) {
-                this.modalMovimientos.textContent = this.movimientos;
-            }
-            
-            // Guardar la información de la imagen actual
+            // Guardar información de la imagen actual
             const imagenSeleccionada = document.querySelector('.image-option.selected');
             if (imagenSeleccionada) {
                 const id = imagenSeleccionada.dataset.id;
@@ -391,7 +339,7 @@ pieza.style.height = `${tamanoPieza}px`;
     }
     
     lanzarConfetti() {
-        for (let i = 0; i < 50; i++) {
+        for (let i = 0; i < 30; i++) {
             setTimeout(() => {
                 const confetti = document.createElement('div');
                 confetti.innerHTML = ['🎉', '🎊', '✨', '⭐', '🎈'][Math.floor(Math.random() * 5)];
@@ -405,7 +353,7 @@ pieza.style.height = `${tamanoPieza}px`;
                 document.body.appendChild(confetti);
                 
                 setTimeout(() => confetti.remove(), 3000);
-            }, i * 20);
+            }, i * 30);
         }
     }
     
@@ -428,6 +376,13 @@ pieza.style.height = `${tamanoPieza}px`;
             
             // Actualizar contadores
             this.actualizarEstadisticas();
+            
+            // Desseleccionar cualquier pieza
+            if (this.piezaSeleccionada) {
+                this.piezaSeleccionada.classList.remove('selected-for-move');
+                this.piezaSeleccionada = null;
+            }
+            this.quitarResaltadoCeldas();
         }
     }
     
@@ -459,6 +414,13 @@ pieza.style.height = `${tamanoPieza}px`;
         if (infoModal) {
             infoModal.classList.remove('show');
         }
+        
+        // Desseleccionar cualquier pieza
+        if (this.piezaSeleccionada) {
+            this.piezaSeleccionada.classList.remove('selected-for-move');
+            this.piezaSeleccionada = null;
+        }
+        this.quitarResaltadoCeldas();
         
         // Crear nuevas piezas
         this.crearPiezas();
@@ -519,15 +481,14 @@ pieza.style.height = `${tamanoPieza}px`;
     }
     
     iniciarTemporizador() {
+        if (!this.tiempoSpan) return;
         this.tiempoInicio = Date.now();
         this.temporizador = setInterval(() => {
             if (!this.juegoCompletado) {
                 const tiempo = Math.floor((Date.now() - this.tiempoInicio) / 1000);
                 const minutos = Math.floor(tiempo / 60);
                 const segundos = tiempo % 60;
-                if (this.tiempoSpan) {
-                    this.tiempoSpan.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
-                }
+                this.tiempoSpan.textContent = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
             }
         }, 1000);
     }
@@ -540,23 +501,8 @@ pieza.style.height = `${tamanoPieza}px`;
     }
     
     actualizarEstadisticas() {
-        const completadas = this.piezasColocadas.filter(v => v).length;
-        if (this.progreso) {
-            this.progreso.textContent = `${completadas}/9`;
-        }
-        if (this.progressBar) {
-            this.progressBar.style.width = `${(completadas / 9) * 100}%`;
-        }
         if (this.movimientosSpan) {
             this.movimientosSpan.textContent = this.movimientos;
-        }
-        this.actualizarContadorPiezas();
-    }
-    
-    actualizarContadorPiezas() {
-        const disponibles = 9 - this.piezasColocadas.filter(v => v).length;
-        if (this.piezasRestantes) {
-            this.piezasRestantes.textContent = `${disponibles} disponibles`;
         }
     }
     
@@ -568,10 +514,7 @@ pieza.style.height = `${tamanoPieza}px`;
         return array;
     }
     
-    // ===== FUNCIONES PARA LA INFORMACIÓN DE LA IMAGEN =====
-    
     crearModalInfo() {
-        // Verificar si ya existe
         if (document.getElementById('infoModal')) return;
         
         const modalInfo = document.createElement('div');
@@ -585,39 +528,21 @@ pieza.style.height = `${tamanoPieza}px`;
                 
                 <img src="" alt="Imagen" class="info-modal-image" id="infoImagenModal">
                 
-                <div class="info-card">
-<div class="info-card-icon">👥</div>
-<div class="info-card-content">
-<span class="info-card-label">Personas evaluadas</span>
-<span class="info-card-value" id="infoPersonasModal">-</span>
-</div>
-</div>
-
-<div class="info-card">
-<div class="info-card-icon">📊</div>
-<div class="info-card-content">
-<span class="info-card-label">Impactos</span>
-<div id="infoImpactosModal"></div>
-</div>
-</div>
-
-
+                <div id="infoImpactosModal"></div>
                 
                 <div class="info-description">
                     <h3>📝 Descripción</h3>
                     <p id="infoDescripcionModal">Cargando descripción...</p>
                 </div>
-                
+            </div>
         `;
         
         document.body.appendChild(modalInfo);
         
-        // Cerrar modal
         document.getElementById('closeInfoModal').addEventListener('click', () => {
             document.getElementById('infoModal').classList.remove('show');
         });
         
-        // Cerrar al hacer clic fuera
         window.addEventListener('click', (e) => {
             const modal = document.getElementById('infoModal');
             if (e.target === modal) {
@@ -630,92 +555,71 @@ pieza.style.height = `${tamanoPieza}px`;
         const modal = document.getElementById('infoModal');
         if (!modal) return;
         
-        // Obtener información de la imagen actual
-        const info = this.imagenInfo || {
-            nombre: this.imagenActual ? this.imagenActual.split('/').pop().split('.')[0] : 'Sin nombre',
-            tamaño: '250 KB',
-            formato: 'PNG',
-            descripcion: 'Esta imagen forma parte de tu colección de rompecabezas.'
-        };
+        const info = this.imagenInfo || this.imagenes[0];
         
-        // Actualizar el modal con la información
         const imgModal = document.getElementById('infoImagenModal');
-        if (imgModal) imgModal.src = this.imagenActual || '';
+        if (imgModal) imgModal.src = this.imagenActual || info.archivo;
         
         const impactosContainer = document.getElementById("infoImpactosModal");
-
-if (impactosContainer) {
-
-impactosContainer.innerHTML = "";
-
-if (info.impactos) {
-
-info.impactos.forEach(item => {
-
-const bloque = document.createElement("div");
-
-bloque.className = "impact-item";
-
-bloque.innerHTML = `
-<div class="impact-personas">👥 ${item.personas} personas</div>
-<div class="impact-texto">📊 ${item.texto}</div>
-`;
-
-impactosContainer.appendChild(bloque);
-
-});
-
-}
-
-}
-        
-        const dimensionesModal = document.getElementById('infoDimensionesModal');
-        if (dimensionesModal) dimensionesModal.textContent = '300x300';
-        
-        const tamañoModal = document.getElementById('infoTamañoModal');
-        if (tamañoModal) tamañoModal.textContent = info.tamaño || '250 KB';
-        
-        const formatoModal = document.getElementById('infoFormatoModal');
-        if (formatoModal) formatoModal.textContent = info.formato || 'PNG';
+        if (impactosContainer) {
+            impactosContainer.innerHTML = "";
+            if (info.impactos) {
+                info.impactos.forEach(item => {
+                    const bloque = document.createElement("div");
+                    bloque.className = "impact-item";
+                    bloque.innerHTML = `
+                        <div class="impact-personas">👥 ${item.personas} personas</div>
+                        <div class="impact-texto">📊 ${item.texto}</div>
+                    `;
+                    impactosContainer.appendChild(bloque);
+                });
+            }
+        }
         
         const descripcionModal = document.getElementById('infoDescripcionModal');
-        if (descripcionModal) descripcionModal.textContent = info.descripcion || 'Imagen de rompecabezas.';
-        
-        // Actualizar logros
-        const logroTiempo = document.getElementById('logroTiempoModal');
-        if (logroTiempo && this.tiempoSpan) {
-            logroTiempo.textContent = `Tiempo: ${this.tiempoSpan.textContent}`;
+        if (descripcionModal) {
+            descripcionModal.textContent = info.descripcion || 'Información no disponible.';
         }
         
-        const logroMovimientos = document.getElementById('logroMovimientosModal');
-        if (logroMovimientos) {
-            logroMovimientos.textContent = `Movimientos: ${this.movimientos}`;
-        }
-        
-        // Mostrar modal
         modal.classList.add('show');
     }
     
     configurarEventos() {
-        // Botones del juego
+        // Botones de control
         const btnMezclar = document.getElementById('btnMezclar');
         if (btnMezclar) {
             btnMezclar.addEventListener('click', () => this.mezclarPiezas());
+            btnMezclar.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.mezclarPiezas();
+            });
         }
         
         const btnReiniciar = document.getElementById('btnReiniciar');
         if (btnReiniciar) {
             btnReiniciar.addEventListener('click', () => this.reiniciarJuego());
+            btnReiniciar.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.reiniciarJuego();
+            });
         }
         
         const btnPista = document.getElementById('btnPista');
         if (btnPista) {
             btnPista.addEventListener('click', () => this.darPista());
+            btnPista.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.darPista();
+            });
         }
         
         const btnRevelar = document.getElementById('btnRevelar');
         if (btnRevelar) {
             btnRevelar.addEventListener('click', () => this.revelarImagen());
+            btnRevelar.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                this.revelarImagen();
+            });
         }
         
         // Modal de victoria
@@ -728,17 +632,6 @@ impactosContainer.appendChild(bloque);
             });
         }
         
-        const modalReiniciar = document.getElementById('modalReiniciar');
-        if (modalReiniciar) {
-            modalReiniciar.addEventListener('click', () => {
-                if (this.victoryModal) {
-                    this.victoryModal.classList.remove('show');
-                }
-                this.reiniciarJuego();
-            });
-        }
-        
-        // NUEVO: Botón para ver información
         const btnVerInfo = document.getElementById('btnVerInfo');
         if (btnVerInfo) {
             btnVerInfo.addEventListener('click', () => {
@@ -755,23 +648,29 @@ impactosContainer.appendChild(bloque);
                 this.victoryModal.classList.remove('show');
             }
         });
+        
+        // Prevenir scroll mientras se arrastra en móvil
+        document.addEventListener('touchmove', (e) => {
+            if (this.piezaSeleccionada) {
+                e.preventDefault();
+            }
+        }, { passive: false });
     }
     
     agregarAnimaciones() {
-        // Verificar si ya existen las animaciones
         if (!document.querySelector('#puzzle-animations')) {
             const style = document.createElement('style');
             style.id = 'puzzle-animations';
             style.textContent = `
                 @keyframes shake {
                     0%, 100% { transform: translateX(0); }
-                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
+                    20%, 40%, 60%, 80% { transform: translateX(3px); }
                 }
                 
                 @keyframes slideIn {
                     from {
-                        transform: translateX(100px);
+                        transform: translateX(50px);
                         opacity: 0;
                     }
                     to {
